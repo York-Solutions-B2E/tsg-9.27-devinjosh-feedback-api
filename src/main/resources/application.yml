@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: tsgfeedbackapi
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: SELECT 1
+
+server:
+  port: 8080
