@@ -1,10 +1,11 @@
 package net.yorksolutions.tsgfeedbackapi.repositories;
 
-// TODO: Implement Spring Data JPA repository interface
-// Extend JpaRepository<FeedbackEntity, UUID>
-// Add findByMemberId(String memberId) method
+import net.yorksolutions.tsgfeedbackapi.repositories.entities.FeedbackEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FeedbackRepository {
-    // TODO: Add repository methods
+import java.util.UUID;
+
+public interface FeedbackRepository extends JpaRepository<FeedbackEntity, UUID> {
+    public FeedbackEntity findByMemberId(String memberId);
 }
 
