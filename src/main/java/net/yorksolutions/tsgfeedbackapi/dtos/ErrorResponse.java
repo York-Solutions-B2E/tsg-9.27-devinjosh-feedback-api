@@ -1,9 +1,10 @@
 package net.yorksolutions.tsgfeedbackapi.dtos;
 
-// TODO: Implement error response structure per spec
-// Structure: { "errors": [{"field": "...", "message": "..."}] }
+import java.util.List;
 
-public record ErrorResponse() {
-    // TODO: Add error structure with nested FieldError record
+public record ErrorResponse(List<FieldError> errors) {
+    public record FieldError(
+        String field,
+        String message
+    ) {}
 }
-

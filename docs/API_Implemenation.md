@@ -14,9 +14,9 @@ Files to create/modify:
 8. `src/main/resources/application-docker.yml` — Docker config
 
 Dependencies:
-- Can work independently
+- Can work independently on ErrorResponse, ValidationException, config files
 - Will mock `FeedbackRepository` and `FeedbackEventPublisher` in tests
-- Needs entity structure (coordinate field names with Devin)
+- Needs entity structure (coordinate field names with Josh)
 
 #### Josh: Infrastructure and integration (data and messaging)
 Focus: Database, Kafka, and REST endpoints
@@ -31,20 +31,21 @@ Files to create/modify:
 7. `src/test/java/.../controllers/FeedbackControllerTest.java` — MockMvc tests (optional for Day 3)
 
 Dependencies:
-- Needs DTOs from Josh (can stub initially)
-- Needs service interface (can stub initially)
+- Needs DTOs from Devin (can stub initially)
+- Needs service interface from Devin (can stub initially)
 - Will implement the entity first
 
 
 ### Phase 1: Parallel setup (start together, ~30 min)
-1. Devin: Create DTO package structure and stub classes
-2. Josh: Create entity package structure and define `FeedbackEntity` with fields
-3. Sync: Share entity field names (memberId, providerName, rating, comment, submittedAt)
+1. Josh: Create entity package structure and define `FeedbackEntity` with fields
+2. Devin: Create DTO package structure and stub classes
+3. Sync: Josh shares entity field names → Devin uses them in DTOs (memberId, providerName, rating, comment, submittedAt)
 
 ### Phase 2: Parallel development (main work)
 Devin:
-- Implement DTOs with Jackson annotations
-- Implement `ValidationException`
+- Implement `ErrorResponse` DTO (independent)
+- Implement `ValidationException` (independent)
+- Implement DTOs with Jackson annotations and validation
 - Implement `FeedbackService` with all validation rules
 - Write unit tests for validation
 - Create `application-local.yml` and `application-docker.yml`
@@ -58,8 +59,8 @@ Josh:
 - Stub `FeedbackController` (can wire to service later)
 
 ### Phase 3: Integration (after both complete)
-1. Josh: Wire `FeedbackController` to `FeedbackService`
-2. Devin: Wire `FeedbackService` to `FeedbackRepository` and `FeedbackEventPublisher`
+1. Devin: Wire `FeedbackService` to `FeedbackRepository` and `FeedbackEventPublisher`
+2. Josh: Wire `FeedbackController` to `FeedbackService`
 3. Both: Test end-to-end flow
 
 ---
@@ -68,7 +69,7 @@ Josh:
 ## Coordination points
 
 1. Entity field names: Josh defines the entity first; Devin uses matching field names in DTOs
-2. Service interface: Josh defines the service signature; Devin wires it in the controller
+2. Service interface: Devin defines the service signature; Josh wires it in the controller
 3. Kafka event contract: Use the same structure as the consumer (already defined)
 4. Package name: The spec says `com.tsg.feedbackapi`, but the current code uses `net.yorksolutions.tsgfeedbackapi`. Decide which to use.
 
@@ -77,7 +78,7 @@ Josh:
 ## Suggested communication protocol
 
 1. Start: Josh shares entity field names → Devin uses them in DTOs
-2. Midway: Josh shares service method signatures → Devin wires controller
+2. Midway: Devin shares service method signatures → Josh wires controller
 3. End: Both test integration together
 
 ---
