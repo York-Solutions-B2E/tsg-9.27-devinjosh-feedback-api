@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
+@Table(name = "feedback")
 @Getter @Setter
 @NoArgsConstructor
 public class FeedbackEntity {
