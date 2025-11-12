@@ -1,9 +1,18 @@
 package net.yorksolutions.tsgfeedbackapi.services;
 
-// TODO: Implement custom exception for validation errors
-// Include field-level error structure
+import net.yorksolutions.tsgfeedbackapi.dtos.ErrorResponse;
+import java.util.List;
 
-public class ValidationException extends RuntimeException {
-    // TODO: Add field-level error structure
+public class ValidationException extends RuntimeException {    
+    private final List<ErrorResponse.FieldError> fieldErrors;
+
+    public ValidationException(List<ErrorResponse.FieldError> fieldErrors) {
+        super("Validation failed");
+        this.fieldErrors = fieldErrors;
+    }
+
+    public List<ErrorResponse.FieldError> getFieldErrors() {
+        return fieldErrors;
+    }
 }
 
