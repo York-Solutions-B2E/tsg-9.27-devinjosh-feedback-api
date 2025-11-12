@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.yorksolutions</groupId>
-    <artifactId>tsgfeedbackapi</artifactId>
+    <artifactId>tsg-9.27-devinjosh-feedback-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>tsgfeedbackapi</name>
-    <description>tsgfeedbackapi</description>
+    <name>tsg-9.27-devinjosh-feedback-api</name>
+    <description>tsg-9.27-devinjosh-feedback-api</description>
     <url/>
     <licenses>
         <license/>
