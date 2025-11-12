@@ -1,10 +1,24 @@
 package net.yorksolutions.tsgfeedbackapi.messaging;
 
-// TODO: Implement Kafka producer configuration
-// Configure ProducerFactory with JSON serializer
-// Configure KafkaTemplate bean
+import net.yorksolutions.tsgfeedbackapi.dtos.contracts.FeedbackSubmittedEvent;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.ProducerFactory;
 
+@Configuration
 public class KafkaProducerConfig {
-    // TODO: Add Kafka producer configuration beans
+
+    @Bean
+    public ProducerFactory<String, FeedbackSubmittedEvent> producerFactory(KafkaProperties kafkaProperties) {
+        return new DefaultKafkaProducerFactory<>(kafkaProperties.buildProducerProperties());
+    }
+
+    @Bean
+    public KafkaTemplate<String, FeedbackSubmittedEvent> kafkaTemplate(ProducerFactory<String, FeedbackSubmittedEvent> producerFactory) {
+        return new KafkaTemplate<>(producerFactory);
+    }
 }
 
