@@ -20,5 +20,9 @@ spring:
     deserialization:
       fail-on-unknown-properties: true
 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
 server:
-  port: 8080
+  port: 8082

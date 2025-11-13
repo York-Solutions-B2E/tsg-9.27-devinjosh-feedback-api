@@ -23,7 +23,7 @@ public class FeedbackController {
     private final FeedbackService feedbackService;
 
     @PostMapping("/feedback")
-    public ResponseEntity<FeedbackResponse> submit(@RequestBody FeedbackRequest feedbackRequest) {
+    public ResponseEntity<FeedbackResponse> submitFeedback(@RequestBody FeedbackRequest feedbackRequest) {
         FeedbackResponse created = feedbackService.createFeedback(feedbackRequest);
         URI location = URI.create("/api/v1/feedback");
         return  ResponseEntity.created(location).body(created);
