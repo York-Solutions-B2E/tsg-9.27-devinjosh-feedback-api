@@ -66,7 +66,7 @@ public class FeedbackService {
         FeedbackEntity entity = mapToEntity(request);
         
         // Save entity (submittedAt will be set automatically by @CreationTimestamp)
-        FeedbackEntity savedEntity = feedbackRepository.save(entity);
+        FeedbackEntity savedEntity = feedbackRepository.saveAndFlush(entity);
         
         // Map to response
         FeedbackResponse response = mapToResponse(savedEntity);
@@ -81,7 +81,7 @@ public class FeedbackService {
     @Transactional(readOnly = true)
     public FeedbackResponse getFeedbackById(UUID id) {
         FeedbackEntity entity = feedbackRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Feedback not found with id: " + id));
+            .orElseThrow(() -> new FeedbackNotFoundException(id));
         return mapToResponse(entity);
     }
 
