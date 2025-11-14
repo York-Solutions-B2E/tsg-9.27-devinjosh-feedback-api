@@ -24,5 +24,19 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
+  springdoc:
+    api-docs:
+      path: /api-docs
+    swagger-ui:
+      path: /swagger-ui.html
+      enabled: true
+      operations-sorter: method
+      tags-sorter: alpha
+      url: /v3/api-docs
+    info:
+      title: Feedback API
+      description: Provider Feedback Portal API
+      version: 1.0.0
+
 server:
   port: 8082
