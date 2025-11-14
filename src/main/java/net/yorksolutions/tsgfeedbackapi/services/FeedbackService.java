@@ -66,7 +66,7 @@ public class FeedbackService {
         FeedbackEntity entity = mapToEntity(request);
         
         // Save entity (submittedAt will be set automatically by @CreationTimestamp)
-        FeedbackEntity savedEntity = feedbackRepository.save(entity);
+        FeedbackEntity savedEntity = feedbackRepository.saveAndFlush(entity);
         
         // Map to response
         FeedbackResponse response = mapToResponse(savedEntity);
