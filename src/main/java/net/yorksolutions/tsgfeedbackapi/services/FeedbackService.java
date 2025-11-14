@@ -81,7 +81,7 @@ public class FeedbackService {
     @Transactional(readOnly = true)
     public FeedbackResponse getFeedbackById(UUID id) {
         FeedbackEntity entity = feedbackRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Feedback not found with id: " + id));
+            .orElseThrow(() -> new FeedbackNotFoundException(id));
         return mapToResponse(entity);
     }
 
