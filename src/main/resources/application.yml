@@ -32,6 +32,7 @@ spring:
       enabled: true
       operations-sorter: method
       tags-sorter: alpha
+      url: /v3/api-docs
     info:
       title: Feedback API
       description: Provider Feedback Portal API
