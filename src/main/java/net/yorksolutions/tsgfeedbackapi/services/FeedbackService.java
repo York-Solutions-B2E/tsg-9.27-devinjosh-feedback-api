@@ -86,11 +86,14 @@ public class FeedbackService {
     }
 
     @Transactional(readOnly = true)
-    public List<FeedbackResponse> getFeedbackByMemberId(String memberId) {
+    public List<FeedbackResponse> getFeedbackByMemberId(String memberId) throws FeedbackNotFoundException {
         List<FeedbackEntity> entities = feedbackRepository.findByMemberId(memberId);
-        return entities.stream()
-            .map(this::mapToResponse)
-            .collect(Collectors.toList());
+        if (entities.isEmpty()) {
+            throw new FeedbackNotFoundException(memberId);
+        }
+            return entities.stream()
+                    .map(this::mapToResponse)
+                    .collect(Collectors.toList());
     }
 
     // Helper methods for mapping

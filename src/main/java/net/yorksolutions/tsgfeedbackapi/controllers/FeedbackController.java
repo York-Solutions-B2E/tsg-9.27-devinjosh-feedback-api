@@ -69,7 +69,7 @@ public class FeedbackController {
             description = "Feedback not found"
         )
     })
-    public FeedbackResponse get(
+    public FeedbackResponse getById(
             @Parameter(
                 description = "UUID of the feedback",
                 required = true,
@@ -91,7 +91,7 @@ public class FeedbackController {
             content = @Content(schema = @Schema(implementation = FeedbackResponse.class))
         )
     })
-    public List<FeedbackResponse> byMember(
+    public List<FeedbackResponse> getByMemberId(
             @Parameter(
                 description = "Member ID to filter feedback by",
                 required = true,
