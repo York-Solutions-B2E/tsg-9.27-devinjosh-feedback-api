@@ -40,13 +40,15 @@ public class FeedbackControllerTest {
     @MockitoBean
     private FeedbackService feedbackService;
 
+    UUID uuid = UUID.randomUUID();
+    Instant now = Instant.now();
+    FeedbackResponse response = new FeedbackResponse(uuid,"m-101", "Dr. Phill", 4, "Cool guy.", now);
+
+    //---------------------------------- Post Request Tests-------------------------------------------------
     @Test
     void submitFeedback_happyPath_ResponseEntityCreated() throws Exception {
         //Arrange
         FeedbackRequest request = new FeedbackRequest("m-101", "Dr. Phill", 4, "Cool guy.");
-        UUID uuid = UUID.randomUUID();
-        Instant now = Instant.now();
-        FeedbackResponse response = new FeedbackResponse(uuid,"m-101", "Dr. Phill", 4, "Cool guy.", now);
 
         when(feedbackService.createFeedback(any(FeedbackRequest.class)))
                 .thenReturn(response);
@@ -90,5 +92,9 @@ public class FeedbackControllerTest {
 
         verifyNoInteractions(feedbackService);
     }
+// ------------------------------- Get Request Tests ------------------------------------------
+    @Test
+    void getFeedbackById_happyPath_ResponseEntityCreated() throws Exception {
 
+    }
 }
