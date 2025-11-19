@@ -40,7 +40,7 @@ public class FeedbackControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper;
 
     @MockitoBean
     private FeedbackService feedbackService;
