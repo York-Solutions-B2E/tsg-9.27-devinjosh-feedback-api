@@ -71,7 +71,7 @@ public class FeedbackServiceTest {
         savedEntity.setComment("Great experience");
         savedEntity.setSubmittedAt(submittedAt);
 
-        when(feedbackRepository.save(any(FeedbackEntity.class))).thenReturn(savedEntity);
+        when(feedbackRepository.saveAndFlush(any(FeedbackEntity.class))).thenReturn(savedEntity);
         doNothing().when(eventPublisher).publishFeedbackSubmitted(any());
 
         // Act
@@ -86,7 +86,7 @@ public class FeedbackServiceTest {
         assertEquals("Great experience", response.comment()); // Fixed: removed period
         assertEquals(submittedAt, response.submittedAt());
 
-        verify(feedbackRepository, times(1)).save(any(FeedbackEntity.class));
+        verify(feedbackRepository, times(1)).saveAndFlush(any(FeedbackEntity.class));
         verify(eventPublisher, times(1)).publishFeedbackSubmitted(any());
     }
 
@@ -427,19 +427,16 @@ public class FeedbackServiceTest {
     }
 
     @Test
-    void getFeedbackByMemberId_WithNoResults_ReturnsEmptyList() {
+    void getFeedbackByMemberId_WithNoResults_ThrowsFeedbackNotFoundException() {
         // Arrange
         String memberId = "m-999";
 
         when(feedbackRepository.findByMemberId(memberId))
             .thenReturn(List.of());  // Empty list
 
-        // Act
-        List<FeedbackResponse> responses = feedbackService.getFeedbackByMemberId(memberId);
-
-        // Assert
-        assertNotNull(responses);
-        assertTrue(responses.isEmpty(), "Should return empty list when no results");
+        // Act/Assert
+        assertThrows(FeedbackNotFoundException.class, () ->
+                feedbackService.getFeedbackByMemberId(memberId));
 
         verify(feedbackRepository, times(1)).findByMemberId(memberId);
     }
