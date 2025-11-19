@@ -8,11 +8,13 @@ import lombok.RequiredArgsConstructor;
 import net.yorksolutions.tsgfeedbackapi.dtos.FeedbackRequest;
 import net.yorksolutions.tsgfeedbackapi.dtos.FeedbackResponse;
 import net.yorksolutions.tsgfeedbackapi.services.FeedbackService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -113,8 +115,8 @@ public class FeedbackController {
         responseCode = "200",
         description = "Service is healthy"
     )
-    public String health() {
-        return "OK";
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Map.of("status", "UP"));
     }
 
 }
