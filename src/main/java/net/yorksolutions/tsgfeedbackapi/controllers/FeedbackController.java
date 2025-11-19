@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
-
+    // Submit Feedback Endpoint
     @PostMapping("/feedback")
     @Operation(
         summary = "Submit feedback",
@@ -53,6 +53,7 @@ public class FeedbackController {
         return  ResponseEntity.created(location).body(created);
     }
 
+    // Get Feedback by ID Endpoint
     @GetMapping("/feedback/{id}")
     @Operation(
         summary = "Get feedback by ID",
@@ -79,6 +80,7 @@ public class FeedbackController {
         return  feedbackService.getFeedbackById(id);
     }
 
+    // Get Feedback by Member ID Endpoint
     @GetMapping("/feedback")
     @Operation(
         summary = "Get feedback by member ID",
@@ -101,6 +103,7 @@ public class FeedbackController {
         return feedbackService.getFeedbackByMemberId(memberId);
     }
 
+    // Health Check Endpoint
     @GetMapping("/health")
     @Operation(
         summary = "Health check",
