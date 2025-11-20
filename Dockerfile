@@ -12,6 +12,10 @@ RUN --mount=type=cache,target=/root/.m2 mvn -q -DskipTests package
 
 # ---- Runtime stage ----------------------------------------------------------
 FROM eclipse-temurin:21-jre AS runtime
+
+# Curl so compose can run healthchecks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Run as a non-root user
